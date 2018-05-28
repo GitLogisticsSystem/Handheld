@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/preference_basic">
+
+        <Preference
+            android:title="@string/version"
+            android:key="@string/version_key"/>
+
+        <EditTextPreference
+            android:title="@string/app"
+            android:key="@string/app_key"
+            android:summary="@string/app_text"/>
+
+        <ListPreference
+            android:title="@string/quality"
+            android:key="@string/quality_key"
+            android:summary="@string/quality_text"
+            android:defaultValue="100"
+            android:entries="@array/qualities"
+            android:entryValues="@array/qualities_value"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_advance">
+
+        <Preference
+            android:title="@string/timeout_title"
+            android:key="@string/timeout_key"
+            android:summary="@string/timeout_text"
+            android:defaultValue="15"/>
+
+        <Preference
+            android:title="@string/reset"
+            android:key="@string/reset_key"
+            android:summary="@string/reset_text"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

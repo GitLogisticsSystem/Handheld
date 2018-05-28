@@ -1,0 +1,73 @@
+<manifest package="com.paradigm2000.cms"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk tools:overrideLibrary="com.github.rahatarmanahmed.cpv"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name="com.paradigm2000.core.Application"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true"
+        tools:replace="android:icon">
+
+        <activity
+            android:name=".LoginActivity_"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".PreferenceActivity_"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".MainActivity_"
+                  android:theme="@style/NoActionBarAppTheme"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".HeaderActivity_"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".PhotoActivity_"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".DetailActivity_"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".EnquiryActivity_"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name="com.paradigm2000.core.gallery.GalleryActivity_"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:screenOrientation="portrait"/>
+
+        <service android:name=".InspectionService_"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8efac231d98a3111fb1db72b54349621e5590867" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1">
+
+        <item
+            android:id="@+id/inspection"
+            android:title="@string/inspection_list"
+            android:icon="@drawable/ic_list_black_24dp" />
+
+        <item
+            android:id="@+id/enquiry"
+            android:title="@string/container_enquiry"
+            android:icon="@drawable/ic_search_black_24dp" />
+
+        <item
+            android:id="@+id/repair"
+            android:title="@string/repair_complete"
+            android:icon="@drawable/ic_verified_user_black_24dp" />
+
+        <item
+            android:id="@+id/location"
+            android:title="@string/location"
+            android:icon="@drawable/ic_add_location_black_24dp"
+            android:visible="false"/>
+
+    </group>
+
+    <item
+        android:id="@+id/files"
+        android:title="@string/gallery"
+        android:icon="@drawable/ic_collections_black_24dp"/>
+
+    <item
+        android:id="@+id/preference"
+        android:title="@string/preference"
+        android:icon="@drawable/ic_settings_black_24dp"/>
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"/>
+
+</menu>

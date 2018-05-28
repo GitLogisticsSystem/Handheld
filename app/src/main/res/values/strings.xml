@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name" translatable="false">ContainerEstimate </string>
+    <string name="baseurl">Server URL</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="power" translatable="false">Powered by Logistics System Ltd.</string>
+    <string name="invalid_url">404 not found or invalid URL</string>
+    <string name="preference_basic">Basic settings</string>
+    <string name="preference_advance">Advanced settings</string>
+    <string name="timeout_title">Timeout</string>
+    <string name="timeout_key" translatable="false">Timeout</string>
+    <string name="timeout_text">Set timeout value of web service(s) (in sec)</string>
+    <string name="reset">Reset</string>
+    <string name="reset_key" translatable="false">Reset</string>
+    <string name="reset_text">Reset server URL\n(%1$s)</string>
+    <string name="preference">Preferences</string>
+    <string name="login_fail">Incorrect username/password</string>
+    <string name="inspection_list" translatable="false">Inspection list</string>
+    <string name="container_enquiry" translatable="false">Container enquiry</string>
+    <string name="repair_complete" translatable="false">Repair complete</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="logout">Logout</string>
+    <string name="welcome">Welcome, %1$s</string>
+    <string name="empty_result">Empty result set</string>
+    <string name="refresh">Refresh</string>
+    <string name="input">Input</string>
+    <string name="add_photo">Take photo</string>
+    <string name="select_image">Select image from …</string>
+    <string name="reset_text2">Cannot deactivate when  logined (%s)</string>
+    <string name="oper" translatable="false">Oper/Grade</string>
+    <string name="size_type" translatable="false">Size/Type</string>
+    <string name="iso_mdte" translatable="false">ISO/M.Date</string>
+    <string name="mgw_tare" translatable="false">MGW/Tare</string>
+    <string name="status_std" translatable="false">Status/Std</string>
+    <string name="remark" translatable="false">Int. Rmk.</string>
+    <string name="estimate" translatable="false">Estimate</string>
+    <string name="complete">Complete</string>
+    <string name="one" translatable="false">1</string>
+    <string name="ac_mac_cpn_rp" translatable="false">E/A/Mac/CPN/RP</string>
+    <string name="ac_cpn_rp" translatable="false">E/Ac/CPN/RP</string>
+    <string name="description" translatable="false">Description</string>
+    <string name="len_wid_qty" translatable="false">Len x Wid x Qty</string>
+    <string name="loca_dmcode_tpc" translatable="false">Loc/DM/TPC</string>
+    <string name="hr_mat" translatable="false">HR/MAT</string>
+    <string name="save">Save</string>
+    <string name="leave2">leave without save</string>
+    <string name="create">Create</string>
+    <string name="stat" translatable="false">Status</string>
+    <string name="esttot" translatable="false">Estm. total</string>
+    <string name="brmk" translatable="false">Booking IN remark</string>
+    <string name="hrmk" translatable="false">Hold/lock remark</string>
+    <string name="irmk" translatable="false">Int. remark</string>
+    <string name="std" translatable="false">Std.</string>
+    <string name="est_no" translatable="false">Estm. #</string>
+    <string name="est_date" translatable="false">Estm. Date</string>
+    <string name="est_appr" translatable="false">Approve date</string>
+    <string name="print">Print</string>
+    <string name="print_success">Print task requested</string>
+    <string name="approve">Approve</string>
+    <string name="upload">Upload photos</string>
+    <string name="record_exist">Previous estimates exist. Link to this record?</string>
+    <string name="empty">(Empty)</string>
+    <string name="app">Application path</string>
+    <string name="app_key" translatable="false">AppPath</string>
+    <string name="app_text">Set the application path to be used</string>
+    <string name="add">Add</string>
+    <string name="new_add">New add</string>
+    <string name="new_record">New Record</string>
+    <string name="cont" translatable="false">Container</string>
+    <string name="invalid_cont" translatable="false">Invalid container #</string>
+    <string name="invalid_chk_dig" translatable="false">Check Digit should be %d</string>
+    <string name="gatelog" translatable="false">Gatelog</string>
+    <string name="invalid_oper" translatable="false">Invalid operator</string>
+    <string name="location">Location</string>
+    <string name="estm" translatable="false">Estm.</string>
+    <string name="subc" translatable="false">Subcon.</string>
+    <string name="dpp" translatable="false">DPP:</string>
+    <string name="lessee" translatable="false">LESSEE:</string>
+    <string name="bremark" translatable="false">B.REMARK:</string>
+    <string name="hr" translatable="false">HR</string>
+    <string name="hrate" translatable="false">H.Rate</string>
+    <string name="lab" translatable="false">LAB</string>
+    <string name="mat" translatable="false">MAT</string>
+    <string name="bkno" translatable="false">BOOKING #:</string>
+    <string name="ohdate" translatable="false">ON-HIRE DATE:</string>
+    <string name="subcon404">Invalid Subcon.</string>
+    <string name="grade">Grade</string>
+    <string name="quality">Photo Quality</string>
+    <string name="quality_key" translatable="false">PhotoQuality</string>
+    <string name="quality_text">Higher quality will result to larger storage size of the photo taken</string>
+    <string-array name="qualities">
+        <item>High (~200kb)</item>
+        <item>Medium (~100kb)</item>
+        <item>Low (~50kb)</item>
+    </string-array>
+    <string-array name="qualities_value" translatable="false">
+        <item>100</item>
+        <item>95</item>
+        <item>80</item>
+    </string-array>
+    <string name="payload" type="id">Payload</string>
+</resources>

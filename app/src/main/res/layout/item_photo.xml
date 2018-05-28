@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/cardview_marginBottom"
+        android:layout_marginRight="@dimen/cardview_margin"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:longClickable="true"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="@dimen/cardview_cornerRadius"
+        app:cardElevation="@dimen/elevation">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="fitCenter"
+            app:backgroundImage="@android:color/white"/>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent_white"
+            android:visibility="gone"/>
+
+        <com.paradigm2000.core.widget.TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/transparent_white"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal"/>
+
+    </android.support.v7.widget.CardView>
+
+</merge>

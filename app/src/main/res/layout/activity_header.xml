@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/paddingSmall">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/cont"
+                android:textStyle="bold"/>
+
+            <com.paradigm2000.core.widget.EditText
+                android:id="@+id/cont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="11"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/oper"
+                android:textStyle="bold"/>
+
+            <com.paradigm2000.cms.widget.AutoCompleteView
+                android:id="@+id/oper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:gravity="center_horizontal"
+                android:inputType="text"
+                android:longClickable="false"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"/>
+
+            <com.paradigm2000.core.widget.EditText
+                android:id="@+id/grade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:inputType="text">
+
+                <requestFocus/>
+
+            </com.paradigm2000.core.widget.EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/iso_mdte"
+                android:textStyle="bold"/>
+
+            <com.paradigm2000.core.widget.EditText
+                android:id="@+id/iso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:nextFocusDown="@+id/mdte"/>
+
+            <com.paradigm2000.core.widget.EditText
+                android:id="@id/mdte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:maxLength="6"
+                android:nextFocusDown="@+id/size"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/size_type"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@id/size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:longClickable="false"
+                android:nextFocusDown="@+id/type"/>
+
+            <EditText
+                android:id="@id/type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:gravity="center_horizontal"
+                android:inputType="text"
+                android:longClickable="false"
+                android:nextFocusDown="@+id/mgw"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/payload"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/nwgt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/mgw_tare"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@id/mgw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:nextFocusDown="@+id/tare"/>
+
+            <EditText
+                android:id="@id/tare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/status_std"
+                android:textStyle="bold"/>
+
+            <Button
+                style="@style/TextAppearance.EditEvent_Spinner"
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"/>
+
+            <Button
+                android:id="@+id/std"
+                style="@style/TextAppearance.EditEvent_Spinner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/remark"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine|textNoSuggestions"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="ButtonStyle">
+
+            <Button
+                android:id="@+id/estimate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/paddingSmall"
+                android:layout_weight="1"
+                android:background="@drawable/button_primary"
+                android:enabled="false"
+                android:text="@string/estimate"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/complete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_primary"
+                android:text="@string/complete"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingSmall"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:text="@string/bkno"/>
+
+                <com.paradigm2000.core.widget.TextView
+                    android:id="@+id/bkno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:text="@string/dpp"/>
+
+                <com.paradigm2000.core.widget.TextView
+                    android:id="@+id/dpp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:text="@string/lessee"/>
+
+                <com.paradigm2000.core.widget.TextView
+                    android:id="@+id/lessee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:text="@string/ohdate"/>
+
+                <com.paradigm2000.core.widget.TextView
+                    android:id="@+id/ohdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:text="@string/bremark"/>
+
+                <com.paradigm2000.core.widget.TextView
+                    android:id="@+id/bremark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

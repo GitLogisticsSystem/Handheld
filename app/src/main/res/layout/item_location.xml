@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true">
+
+        <ViewSwitcher
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.paradigm2000.core.widget.ImageButton
+                android:id="@+id/select"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/paddingSmall"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_add_location_black_24dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/container"/>
+
+            </FrameLayout>
+
+        </ViewSwitcher>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator"
+            android:layout_gravity="bottom"
+            android:background="@android:color/darker_gray"/>
+
+    </FrameLayout>
+
+</merge>

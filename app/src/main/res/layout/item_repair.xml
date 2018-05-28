@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/listPreferredItemHeight"
+        android:orientation="horizontal"
+        android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?attr/listPreferredItemPaddingRight">
+
+        <com.paradigm2000.core.widget.TextView
+            android:id="@android:id/text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.paradigm2000.core.widget.SimpleDraweeButton
+            android:id="@+id/photos"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:actualImageScaleType="centerCrop"
+            app:placeholderImage="@drawable/ic_add_a_photo_black_24dp"
+            app:placeholderImageScaleType="centerInside"/>
+
+        <com.paradigm2000.core.widget.ImageButton
+            android:id="@+id/submit"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/paddingLarge"
+            android:src="@drawable/ic_done_black_24dp"/>
+
+    </LinearLayout>
+
+</merge>

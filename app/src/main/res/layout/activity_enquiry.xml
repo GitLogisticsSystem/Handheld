@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/paddingSmall">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/oper"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/oper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:focusable="false"
+                android:inputType="text"
+                android:longClickable="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/stat"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:focusable="false"
+                android:inputType="text"
+                android:longClickable="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/esttot"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/esttot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:focusable="false"
+                android:inputType="text"
+                android:longClickable="false"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator"
+            android:layout_marginBottom="@dimen/paddingSmall"
+            android:background="@android:color/darker_gray"/>
+
+        <EditText
+            android:id="@+id/brmk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:focusable="false"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:longClickable="false"
+            android:minLines="4"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/std"
+                android:textStyle="bold"/>
+
+            <Button
+                style="@style/TextAppearance.EditEvent_Spinner"
+                android:id="@+id/std"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingSmall"
+            android:background="@drawable/button_primary"
+            android:text="@string/upload"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/estimate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_primary"
+            android:text="@string/estimate"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator"
+            android:layout_marginBottom="@dimen/paddingSmall"
+            android:layout_marginTop="@dimen/paddingSmall"
+            android:background="@android:color/darker_gray"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/cardview_margin"/>
+
+    </LinearLayout>
+
+</ScrollView>

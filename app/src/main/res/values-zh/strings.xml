@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="baseurl">伺服器網址</string>
+    <string name="username">用戶名</string>
+    <string name="password">密碼</string>
+    <string name="login">登入</string>
+    <string name="invalid_url">找不到位置或網址不明</string>
+    <string name="preference_basic">基本設定</string>
+    <string name="preference_advance">進階設定</string>
+    <string name="timeout_title">通訊超時</string>
+    <string name="timeout_text">設定通訊超時上限（秒）</string>
+    <string name="reset">重設</string>
+    <string name="reset_text">重設伺服器網址\n（%1$s）</string>
+    <string name="preference">設定</string>
+    <string name="login_fail">用戶名或密碼錯誤</string>
+    <string name="open">打開</string>
+    <string name="close">關閉</string>
+    <string name="logout">登出</string>
+    <string name="welcome">歡迎，%1$s</string>
+    <string name="empty_result">無結果</string>
+    <string name="refresh">重新整理</string>
+    <string name="input">輸入</string>
+    <string name="add_photo">拍照片</string>
+    <string name="select_image">從…取得圖片</string>
+    <string name="reset_text2">已登入不能解除綁定（%s）</string>
+    <string name="complete">完成</string>
+    <string name="save">儲存</string>
+    <string name="leave2">放棄新增</string>
+    <string name="create">新增</string>
+    <string name="print">打印</string>
+    <string name="print_success">成功提交打印請求</string>
+    <string name="approve">批准</string>
+    <string name="upload">上載相片</string>
+    <string name="record_exist">存在舊記錄，要連結嗎？</string>
+    <string name="empty">（空白）</string>
+    <string name="app">應用路徑</string>
+    <string name="app_text">伺服器上相對應的應用路徑</string>
+    <string name="add">新增</string>
+    <string name="new_add">新</string>
+    <string name="new_record">新記錄</string>
+    <string name="location">登記位置</string>
+    <string name="subcon404">沒有此 Subcon</string>
+    <string name="grade">級別</string>
+    <string name="quality">相片品質</string>
+    <string name="quality_text">高品質相片會佔用更多儲存空間</string>
+    <string-array name="qualities">
+        <item>高 (~200kb)</item>
+        <item>中 (~100kb)</item>
+        <item>低 (~50kb)</item>
+    </string-array>
+</resources>
