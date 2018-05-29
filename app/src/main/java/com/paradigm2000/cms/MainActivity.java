@@ -163,6 +163,7 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
                     Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragments);
                     if (fragment instanceof InspectionFragment) return true;
                     String tag = inspection.getClass().getName();
+                    Log.w(TAG, "selected : "+ tag);
                     if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragments, inspection, tag)
@@ -175,6 +176,7 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
                     Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragments);
                     if (fragment instanceof ContainerFragment) return true;
                     String tag = container.getClass().getName();
+                    Log.w(TAG, "selected : "+ tag);
                     if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragments, container, tag)
@@ -187,6 +189,7 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
                     Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragments);
                     if (fragment instanceof RepairFragment) return true;
                     String tag = repair.getClass().getName();
+                    Log.w(TAG, "selected : "+ tag);
                     if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragments, repair, tag)
@@ -199,6 +202,7 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
                     Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragments);
                     if (fragment instanceof LocationFragment) return true;
                     String tag = location.getClass().getName();
+                    Log.w(TAG, "selected : "+ tag);
                     if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragments, location, tag)

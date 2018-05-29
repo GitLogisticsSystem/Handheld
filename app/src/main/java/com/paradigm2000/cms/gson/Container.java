@@ -12,6 +12,8 @@ import java.util.Locale;
 @Parcel @SuppressWarnings("unused")
 public class Container extends Header
 {
+    public static String[] def_stat_list = new String[] { "AV", "DM" };
+
     public String mkey;
     public float esttot;
     public int printjob;
@@ -25,6 +27,10 @@ public class Container extends Header
     public String[] std_list()
     {
         return TextUtils.isEmpty(std_list)? new String[] { "" }: ("|" + std_list).split("\\|");
+    }
+    public String[] stat_list()
+    {
+        return TextUtils.isEmpty(stat_list)? def_stat_list: stat_list.split("\\|");
     }
 
     @Override

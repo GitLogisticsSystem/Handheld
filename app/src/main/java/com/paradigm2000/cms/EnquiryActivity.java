@@ -72,12 +72,14 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
     MenuItem _refresh;
     @ViewById(R.id.oper)
     EditText _oper;
-    @ViewById(R.id.status)
-    EditText _status;
+    @ViewById(R.id.sys)
+    EditText _sys;
     @ViewById(R.id.esttot)
     EditText _esttot;
     @ViewById(R.id.brmk)
     EditText _brmk;
+    @ViewById(R.id.status)
+    Button _status;
     @ViewById(R.id.std)
     Button _std;
     @ViewById(R.id.upload)
@@ -192,9 +194,10 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
     void showEnquiry()
     {
         _oper.setText(container.oper);
-        _status.setText(container.sys);
+        _sys.setText(container.sys);
         _esttot.setText(String.valueOf(container.esttot));
         _brmk.setText(container.rmk);
+        _status.setText(container.stat);
     }
 
     String last4Digits()
@@ -254,6 +257,26 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
                 })
                 .setCloseOnClick(false)
                 .show();
+    }
+
+    @Click(R.id.status)
+    void chooseStatus()
+    {
+        new Dialog2(this, Dialog2.LIST_TYPE)
+                .setTitle(container.cont)
+                .setSelectedItem(_status.getText().toString())
+                .setItems(container.stat_list(), new Dialog2.OnClickListener()
+                {
+                    @Override
+                    public void onClick(Dialog2 dialog)
+                    {
+                        String item = dialog.getSelectedItem().toString();
+                        _status.setText(item);
+                    }
+                })
+                .showCancel(true)
+                .show();
+
     }
 
     @Click(R.id.std)
