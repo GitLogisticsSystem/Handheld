@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
@@ -35,9 +36,11 @@ import com.paradigm2000.core.retrofit.InternalServerError;
 import com.paradigm2000.core.retrofit.RetrofitUtil;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterTextChange;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.BeforeTextChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -78,12 +81,16 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
     EditText _esttot;
     @ViewById(R.id.brmk)
     EditText _brmk;
-    @ViewById(R.id.status)
+    @ViewById(R.id.loc)
+    EditText _loc;
+    @ViewById(R.id.stat)
     Button _status;
-    @ViewById(R.id.std)
-    Button _std;
     @ViewById(R.id.upload)
     Button _upload;
+    @ViewById(R.id.update1)
+    Button _update1;
+    @ViewById(R.id.update2)
+    Button _update2;
     @ViewById(R.id.estimate)
     Button _estimate;
     @ViewById(R.id.details)
@@ -135,7 +142,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
     @AfterViews
     void afterViews()
     {
-        ((View) _std.getParent()).setVisibility("AET".equals(container.sys)? View.VISIBLE: View.GONE);
+
         showEnquiry();
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         _details.setLayoutManager(manager);
@@ -219,6 +226,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
     // TODO UI events
     /****************************************/
 
+
     @OptionsItem(R.id.photos)
     void addPhoto()
     {
@@ -259,7 +267,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
                 .show();
     }
 
-    @Click(R.id.status)
+    @Click(R.id.stat)
     void chooseStatus()
     {
         new Dialog2(this, Dialog2.LIST_TYPE)
@@ -278,30 +286,52 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
                 .show();
 
     }
-
-    @Click(R.id.std)
-    void chooseStd()
+    @Click(R.id.update1)
+    void updateSpec1()
     {
-        final String[] std_list = container.std_list();
-        std_list[0] = getString(R.string.empty);
-        String selected = _std.getText().toString();
-        if (selected.length() == 0) selected = std_list[0];
-        new Dialog2(this, Dialog2.LIST_TYPE)
+        new Dialog(this, Dialog.PROMPT_TYPE)
                 .setTitle(container.cont)
-                .setSelectedItem(selected)
-                .setItems(std_list, new Dialog2.OnClickListener()
+                .setContentRes(R.string.confirm, getString(R.string.update).toLowerCase(Locale.ENGLISH))
+                .setConfirm(R.string.submit)
+                .setConfirmListener(new Dialog.OnClickListener()
                 {
                     @Override
-                    public void onClick(Dialog2 dialog)
+                    public void onClick(Dialog dialog)
                     {
-                        String value = dialog.getSelectedItem().toString();
-                        if (value.equals(std_list[0])) value = "";
-                        _std.setText(container.std = value);
+                        dialog.changeType(Dialog.PROGRESS_TYPE)
+                                .setCloseOnClick(false)
+                                .setCancelOnBack(false)
+                                .setContentRes(R.string.LOADING);
+                        doUpdate(container,"STAT",_status.getText().toString(),dialog);
                     }
                 })
-                .showCancel(true)
+                .setCloseOnClick(false)
                 .show();
     }
+    @Click(R.id.update2)
+    void updateSpec2()
+    {
+        new Dialog(this, Dialog.PROMPT_TYPE)
+                .setTitle(container.cont)
+                .setContentRes(R.string.confirm, getString(R.string.update).toLowerCase(Locale.ENGLISH))
+                .setConfirm(R.string.submit)
+                .setConfirmListener(new Dialog.OnClickListener()
+                {
+                    @Override
+                    public void onClick(Dialog dialog)
+                    {
+                        dialog.changeType(Dialog.PROGRESS_TYPE)
+                                .setCloseOnClick(false)
+                                .setCancelOnBack(false)
+                                .setContentRes(R.string.LOADING);
+                        doUpdate(container,"LOC",_loc.getText().toString(),dialog);
+                    }
+                })
+                .setCloseOnClick(false)
+                .show();
+    }
+
+
 
     @Click(R.id.estimate)
     void estimate()
@@ -421,13 +451,13 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
         {
             if ("AET".equals(container.sys))
             {
-                ((View) _std.getParent()).setVisibility(View.VISIBLE);
+
                 _estimate.setVisibility(View.VISIBLE);
-                _std.setText(container.std);
+
             }
             else
             {
-                ((View) _std.getParent()).setVisibility(View.GONE);
+
                 _estimate.setVisibility(View.GONE);
                 enquiryAdapter.apply(result.enquiries);
             }
@@ -540,7 +570,54 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
             dialog.dismissWithAnimation();
         }
     }
+    /****************************************/
+    // TODO POST uptCTN.ashx
+    /****************************************/
+    @Background
+    void doUpdate(Container container,String field1,String value, Dialog dialog)
+    {
+        IOException error = null;
+        Boolean result = null;
+        try
+        {
+            result = api.updateSpecific(container,field1,value).execute().body();
+            if (result == null) error = util.createError();
+        }
+        catch (UnknownHostException e)
+        {
+            if (!isDestroyed()) util.noNetwork(this);
+        }
+        catch (SocketTimeoutException e)
+        {
+            if (!isDestroyed()) util.timeout(this);
+        }
+        catch (IOException e)
+        {
+            error = e;
+        }
+        if (!isDestroyed()) afterPrint(error, result, dialog);
+    }
 
+    @UiThread
+    void afterUpdate(IOException error, Boolean result, Dialog dialog)
+    {
+        if (error != null)
+        {
+            vibrator.vibrate(Common.PATTERN, -1);
+            dialog.changeType(Dialog.ERROR_TYPE).setContent(error.getMessage());
+            if (error instanceof InternalServerError) util.report("Enquiry_Update", error);
+        }
+        else if (result != null)
+        {
+            dialog.dismissWithAnimation();
+            Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
+            refresh();
+        }
+        else
+        {
+            dialog.dismissWithAnimation();
+        }
+    }
     /****************************************/
     // TODO POST uploadPhoto_CTN.ashx
     /****************************************/
