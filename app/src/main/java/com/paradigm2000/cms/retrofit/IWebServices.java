@@ -78,6 +78,9 @@ public interface IWebServices
     @POST("androidbc.asmx/uptGatelog")
     Call<Boolean> updateHeader(@Body JsonObject body);
 
+    @POST("androidbc.asmx/uptCTN")
+    Call<Boolean> updateSpecific(@Body JsonObject body);
+
     @POST("androidbc.asmx/getDesc")
     @RetrieveMethod(cls=Parser.class, value="getDesc")
     Call<String> getDesc(@Body JsonObject body);

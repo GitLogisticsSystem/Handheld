@@ -100,5 +100,6 @@
         <item>95</item>
         <item>80</item>
     </string-array>
-    <string name="payload" type="id">Payload</string>
+    <string name="payload" type="id" translatable="false">Payload</string>
+    <string name="update" translatable="false">Update</string>
 </resources>

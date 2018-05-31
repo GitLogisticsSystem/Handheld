@@ -322,6 +322,17 @@ public class ApiCaller
         if (DEBUG) Log.i(TAG, "params: " + body);
         return services.updateDetail(body);
     }
+    public Call<Boolean> updateSpecific(Container container, String field, String value)
+    {
+        JsonObject body = new JsonObject();
+
+        body.addProperty("usercode", pref.username().get());
+        body.addProperty("mkey", container.mkey);
+        body.addProperty("utype", field);
+        body.addProperty("val", value);
+        if (DEBUG) Log.i(TAG, "params: " + body);
+        return services.updateSpecific(body);
+    }
 
     public Call<Boolean> deleteDetail(Detail detail)
     {

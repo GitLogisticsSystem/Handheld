@@ -7,6 +7,7 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -148,6 +149,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
         _details.setLayoutManager(manager);
         _details.setAdapter(enquiryAdapter);
         enquiryAdapter.setListener(this);
+        _loc.setFilters(new InputFilter[]{new InputFilter.LengthFilter(7),new InputFilter.AllCaps()});
     }
 
     @Override

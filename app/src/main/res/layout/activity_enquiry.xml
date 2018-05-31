@@ -85,6 +85,78 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/stat"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/stat"
+                style="@style/TextAppearance.EditEvent_Spinner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/update1"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:background="@drawable/button_primary"
+                android:text="@string/update"
+                android:textColor="@android:color/white"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingXSmall"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:ems="5"
+                android:text="@string/location"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/loc"
+                android:layout_width="192dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:inputType="text"
+                android:maxLength="7"
+                android:textAllCaps="true" />
+
+            <Button
+                android:id="@+id/update2"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/paddingSmall"
+                android:background="@drawable/button_primary"
+                android:text="@string/update"
+                android:textColor="@android:color/white"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/separator"
@@ -102,37 +174,6 @@
             android:longClickable="false"
             android:minLines="4" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/paddingXSmall"
-            android:orientation="horizontal">
-
-            <com.paradigm2000.core.widget.TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:ems="5"
-                android:text="@string/status_std"
-                android:textStyle="bold"/>
-
-            <Button
-                style="@style/TextAppearance.EditEvent_Spinner"
-                android:id="@+id/status"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"/>
-
-            <Button
-                android:id="@+id/std"
-                style="@style/TextAppearance.EditEvent_Spinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"/>
-
-        </LinearLayout>
 
         <Button
             android:id="@+id/upload"
@@ -143,6 +184,7 @@
             android:text="@string/upload"
             android:textColor="@android:color/white"
             android:visibility="gone"/>
+
 
         <Button
             android:id="@+id/estimate"
@@ -164,7 +206,7 @@
             android:id="@+id/details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/cardview_margin"/>
+            android:padding="@dimen/cardview_margin" />
 
     </LinearLayout>
 

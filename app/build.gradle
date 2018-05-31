@@ -63,7 +63,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "v2.2.15 (2018/05/25)"
+        versionName "v2.2.16 (2018/05/31)"
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {
