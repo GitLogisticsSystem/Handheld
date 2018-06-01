@@ -207,6 +207,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
         _esttot.setText(String.valueOf(container.esttot));
         _brmk.setText(container.rmk);
         _status.setText(container.stat);
+        _loc.setText(container.loca);
     }
 
     String last4Digits()
@@ -326,7 +327,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
                                 .setCloseOnClick(false)
                                 .setCancelOnBack(false)
                                 .setContentRes(R.string.LOADING);
-                        doUpdate(container,"LOC",_loc.getText().toString(),dialog);
+                        doUpdate(container,"LOCA",_loc.getText().toString(),dialog);
                     }
                 })
                 .setCloseOnClick(false)
@@ -597,7 +598,7 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
         {
             error = e;
         }
-        if (!isDestroyed()) afterPrint(error, result, dialog);
+        if (!isDestroyed()) afterUpdate(error, result, dialog);
     }
 
     @UiThread
@@ -612,7 +613,8 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
         else if (result != null)
         {
             dialog.dismissWithAnimation();
-            Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
+            dialog.changeType(Dialog.SUCCESS_TYPE).setContentRes(R.string.success);
+            //Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
             refresh();
         }
         else
