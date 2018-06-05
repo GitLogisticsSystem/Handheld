@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/listPreferredItemHeight"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/paddingMedium"
+        android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?attr/listPreferredItemPaddingRight"
+        android:paddingTop="@dimen/paddingMedium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.paradigm2000.core.widget.TextView
+                android:id="@android:id/text1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/paddingSmall"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/new_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/paddingXSmall"
+                android:ems="5"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/paddingXSmall"
+                android:textColor="@android:color/white"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator"
+            android:background="@android:color/darker_gray"/>
+
+        <com.paradigm2000.core.widget.TextView
+            android:id="@android:id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+
+</merge>

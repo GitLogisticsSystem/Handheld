@@ -57,6 +57,7 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
     ContainerFragment container = new ContainerFragment_();
     RepairFragment repair = new RepairFragment_();
     LocationFragment location = new LocationFragment_();
+    ContainerOutFragment containero = new ContainerOutFragment_();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -193,6 +194,19 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
                     if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragments, repair, tag)
+                            .addToBackStack(tag)
+                            .commit();
+                    return true;
+                }
+                case R.id.containerout:
+                {
+                    Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragments);
+                    if (fragment instanceof ContainerOutFragment) return true;
+                    String tag = containero.getClass().getName();
+                    Log.w(TAG, "selected : "+ tag);
+                    if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragments, containero, tag)
                             .addToBackStack(tag)
                             .commit();
                     return true;

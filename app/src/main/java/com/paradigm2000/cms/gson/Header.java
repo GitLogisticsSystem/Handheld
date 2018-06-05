@@ -37,6 +37,7 @@ public class Header implements PhotoGroup
     public String iso;
     public String nwgt;
     public int mgw;
+    public String license;
     public int tare;
     public String mdte;
     public String std;
@@ -80,6 +81,7 @@ public class Header implements PhotoGroup
         header.macc_list = macc_list;
         header.details = details;
         header.rtable = rtable;
+        header.license = license;
         return header;
     }
 
