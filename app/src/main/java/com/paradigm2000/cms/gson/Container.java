@@ -22,6 +22,7 @@ public class Container extends Header
     public String rmk;
     public String sys;
     public String loca;
+    public String stat_but;
     public Enquiry[] enquiries;
 
     @Override

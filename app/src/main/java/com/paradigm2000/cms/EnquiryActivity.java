@@ -402,6 +402,12 @@ public class EnquiryActivity extends Activity implements EnquiryAdapter.EnquiryL
             }
             if (container != null)
             {
+                if("Y".equals((this.container = container).stat_but)){
+                    _update1.setVisibility(View.VISIBLE);
+                }else{
+                    _update1.setVisibility(View.VISIBLE);
+                    _update1.setVisibility(View.GONE);
+                }
                 if ("AET".equals((this.container = container).sys))
                 {
                     container.acc_list = api.getAcc(container).execute().body();

@@ -46,7 +46,7 @@ public class PreferenceActivity extends com.paradigm2000.core.PreferenceActivity
         _version.setSummary(Common.get().getVersion(this));
         _appPath.setEnabled(!logined);
         _reset.setEnabled(!logined);
-        _reset.setSummary(getString(R.string.reset_text, pref.ServerURL().get()));
+        _reset.setSummary(getString(R.string.reset_text, pref.ServerURL().get()+"/"+pref.AppPath().get()));
     }
 
     /****************************************/

@@ -116,7 +116,7 @@
                 android:background="@drawable/button_primary"
                 android:text="@string/update"
                 android:textColor="@android:color/white"
-                android:visibility="visible" />
+                />
 
 
         </LinearLayout>
