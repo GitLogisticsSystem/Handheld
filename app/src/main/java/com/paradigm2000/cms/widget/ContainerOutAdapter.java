@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.paradigm2000.cms.gson.Header;
+import com.paradigm2000.cms.gson.ContainerOut;
 import com.paradigm2000.core.widget.RecyclerViewAdapterBase;
 import com.paradigm2000.core.widget.ViewWrapper;
 
@@ -14,7 +14,7 @@ import org.androidannotations.annotations.RootContext;
 import java.util.Collections;
 
 @EBean
-public class ContainerOutAdapter extends RecyclerViewAdapterBase<Header, ContainerOutView>
+public class ContainerOutAdapter extends RecyclerViewAdapterBase<ContainerOut, ContainerOutView>
 {
     Gson gson = new Gson();
 
@@ -23,11 +23,11 @@ public class ContainerOutAdapter extends RecyclerViewAdapterBase<Header, Contain
 
     boolean mEnabled = true;
 
-    public void apply(Header[] headers)
+    public void apply(ContainerOut[] containerouts)
     {
         notifyItemRangeRemoved(0, getItemCount());
         items.clear();
-        Collections.addAll(items, headers);
+        Collections.addAll(items, containerouts);
         notifyItemRangeInserted(0, getItemCount());
     }
 
@@ -44,7 +44,7 @@ public class ContainerOutAdapter extends RecyclerViewAdapterBase<Header, Contain
     }
 
     @Override
-    public void onBindViewHolder(ViewWrapper<ContainerOutView> holder, ContainerOutView view, int position, Header item)
+    public void onBindViewHolder(ViewWrapper<ContainerOutView> holder, ContainerOutView view, int position, ContainerOut item)
     {
         view.bind(item);
         view.setEnabled(mEnabled);

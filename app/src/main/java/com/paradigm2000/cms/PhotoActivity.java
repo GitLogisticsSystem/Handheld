@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.paradigm2000.cms.app.PhotoGroup;
+import com.paradigm2000.cms.gson.ContainerOut;
 import com.paradigm2000.cms.gson.Detail;
 import com.paradigm2000.cms.gson.Header;
 import com.paradigm2000.cms.gson.Repair;
@@ -60,6 +61,8 @@ public class PhotoActivity extends Activity implements PhotoAdapter.AddPhotoList
     EventBus bus;
     @Extra("Photo_header") @InstanceState
     Header header;
+    @Extra("Container_Out")@InstanceState
+    ContainerOut containerout;
     @Extra("Photo_detail") @InstanceState
     Detail detail;
     @Extra("Photo_repair") @InstanceState

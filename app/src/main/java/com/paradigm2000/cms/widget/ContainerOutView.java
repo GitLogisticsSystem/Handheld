@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.paradigm2000.cms.BuildConfig;
 import com.paradigm2000.cms.R;
+import com.paradigm2000.cms.gson.ContainerOut;
 import com.paradigm2000.cms.gson.Header;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -41,30 +42,30 @@ public class ContainerOutView extends FrameLayout
         setBackgroundColor(Color.WHITE);
     }
 
-    public void bind(Header header)
+    public void bind(ContainerOut containerout)
     {
         Date date = null;
         try
         {
-            date = parser.parse(header.time1);
+            date = parser.parse(containerout.time1);
         }
         catch (ParseException e)
         {
-            if (DEBUG) Log.w(TAG, "Fail to parse date @" + header.mdte, e);
+            if (DEBUG) Log.w(TAG, "Fail to parse date @" + containerout.mdte, e);
         }
         String value1 = null;
-        if (!TextUtils.isEmpty(header.cont))value1 = header.cont;
-        if (!TextUtils.isEmpty(header.oper))value1 += " (" + header.oper + ")";
-        if (!TextUtils.isEmpty(header.size)) value1 += " " + header.size;
-        if (!TextUtils.isEmpty(header.type)) value1 += " / " + header.type;
+        if (!TextUtils.isEmpty(containerout.cont))value1 = containerout.cont;
+        if (!TextUtils.isEmpty(containerout.oper))value1 += " (" + containerout.oper + ")";
+        if (!TextUtils.isEmpty(containerout.size)) value1 += " " + containerout.size;
+        if (!TextUtils.isEmpty(containerout.type)) value1 += " / " + containerout.type;
         text1.setText(value1);
         String value2 = "@ " + (date == null? "dd/MM - kk:mm": formatter.format(date));
-        if (!TextUtils.isEmpty(header.stat)) value2 = header.stat + " " + value2;
-        if (!TextUtils.isEmpty(header.license)) value2 +=  value2+" ("+ header.stat+") ";
+        if (!TextUtils.isEmpty(containerout.stat)) value2 = containerout.stat + " " + value2;
+        if (!TextUtils.isEmpty(containerout.trac)) value2 +=  value2+" ("+ containerout.trac+") ";
         text2.setText(value2);
-        new_add.setBackgroundResource(header.isSUH()? R.drawable.button_red: R.drawable.button_green);
-        new_add.setText(header.isSUH()? R.string.new_add: R.string.gatelog);
-        new_add.setAlpha(header.isCompleted()? .1f: 1);
+        new_add.setBackgroundResource(containerout.isSUH()? R.drawable.button_red: R.drawable.button_green);
+        new_add.setText(containerout.isSUH()? R.string.new_add: R.string.gatelog);
+        new_add.setAlpha(containerout.isCompleted()? .1f: 1);
     }
 
     @Override

@@ -20,7 +20,8 @@ import java.util.Date;
 import java.util.Locale;
 
 @EViewGroup(R.layout.item_inspection)
-public class InspectionView extends FrameLayout
+public class
+InspectionView extends FrameLayout
 {
     static final boolean DEBUG = BuildConfig.debug;
     static final String TAG = "InspectionView";

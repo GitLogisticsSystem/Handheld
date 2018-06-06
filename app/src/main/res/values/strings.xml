@@ -42,7 +42,7 @@
     <string name="ac_cpn_rp" translatable="false">E/Ac/CPN/RP</string>
     <string name="description" translatable="false">Description</string>
     <string name="len_wid_qty" translatable="false">Len x Wid x Qty</string>
-    <string name="loca_dmcode_tpc" translatable="false">Loc/DM/TPC</string>
+    <string name="loca_dmcode_tpc" translatable="false">Loc/DMCode/TPC</string>
     <string name="hr_mat" translatable="false">HR/MAT</string>
     <string name="save">Save</string>
     <string name="leave2">leave without save</string>
@@ -101,6 +101,8 @@
         <item>80</item>
     </string-array>
     <string name="payload" type="id" translatable="false">Payload</string>
-    <string name="update" translatable="false">Update</string>
     <string name="conatiner_out" translatable="false">Container Out</string>
+    <string name="trackerNo" translatable="false">Tracker No.</string>
+    <string name="update" translatable="false">Update</string>
+    <string name="containerout_list">Container Out List</string>
 </resources>

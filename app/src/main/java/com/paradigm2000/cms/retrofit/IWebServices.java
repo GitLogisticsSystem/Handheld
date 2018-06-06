@@ -3,6 +3,7 @@ package com.paradigm2000.cms.retrofit;
 import com.google.gson.JsonObject;
 import com.paradigm2000.cms.gson.Booking;
 import com.paradigm2000.cms.gson.Container;
+import com.paradigm2000.cms.gson.ContainerOut;
 import com.paradigm2000.cms.gson.Detail;
 import com.paradigm2000.cms.gson.Enquiry;
 import com.paradigm2000.cms.gson.Header;
@@ -24,6 +25,10 @@ public interface IWebServices
 
     @POST("androidbc.asmx/listGateIN")
     Call<Header[]> list_inspection(@Body JsonObject body);
+
+    @POST("androidbc.asmx/listGateOUT")
+    Call<ContainerOut[]> list_gateout(@Body JsonObject body);
+
 
     @POST("androidbc.asmx/listCTN")
     Call<Container[]> list_container(@Body JsonObject body);
@@ -67,6 +72,7 @@ public interface IWebServices
     @POST("androidbc.asmx/delSUH")
     Call<Boolean> delHeader(@Body JsonObject body);
 
+
     @POST("androidbc.asmx/chkCont")
     @RetrieveMethod(cls=Parser.class, value="chkCont")
     Call<Header> chkCont(@Body JsonObject body);
@@ -77,6 +83,9 @@ public interface IWebServices
 
     @POST("androidbc.asmx/uptGatelog")
     Call<Boolean> updateHeader(@Body JsonObject body);
+
+    @POST("androidbc.asmx/uptGatelog")
+    Call<Boolean> updateContainerOut(@Body JsonObject body);
 
     @POST("androidbc.asmx/uptCTN")
     Call<Boolean> updateSpecific(@Body JsonObject body);

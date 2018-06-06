@@ -36,7 +36,9 @@
         <activity android:name=".HeaderActivity_"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateHidden"/>
-
+        <activity android:name=".ContainerOutActivity_"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".PhotoActivity_"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:screenOrientation="portrait"/>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.h6ah4i.android.widget.advrecyclerview.decoration.SimpleListDividerDecorator;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
 import com.paradigm2000.cms.event.PhotosCheckEvent;
+import com.paradigm2000.cms.gson.ContainerOut;
 import com.paradigm2000.cms.gson.Header;
 import com.paradigm2000.cms.gson.Headers;
 import com.paradigm2000.cms.retrofit.ApiCaller;
@@ -117,11 +118,6 @@ public class ContainerOutFragment extends Fragment implements RecyclerViewAdapte
     // TODO UI events
     /****************************************/
 
-    @OptionsItem(R.id.add)
-    void add()
-    {
-        HeaderActivity_.intent(this).isNew(true).start();
-    }
 
     @OptionsItem(R.id.refresh)
     void refresh()
@@ -138,56 +134,27 @@ public class ContainerOutFragment extends Fragment implements RecyclerViewAdapte
     @Override
     public void onItemClick(RecyclerView.Adapter adapter, int position, Object item)
     {
-        final Header header = (Header) item;
-        if (header.prev_suh > 0)
-        {
-            new Dialog(getContext(), Dialog.PROMPT_TYPE)
-                    .setTitle(header.license)
-                    .setContentRes(R.string.record_exist)
-                    .setConfirmListener(new Dialog.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(Dialog dialog)
-                        {
-                            dialog.changeType(Dialog.PROGRESS_TYPE)
-                                    .setCancelOnBack(false)
-                                    .setCloseOnClick(false)
-                                    .setContentRes(R.string.LOADING);
-                            doLink(header, dialog);
-                        }
-                    })
-                    .setCancelListener(new Dialog.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(Dialog dialog)
-                        {
-                            HeaderActivity_.intent(ContainerOutFragment.this)
-                                    .header(header)
-                                    .start();
-                        }
-                    })
-                    .show();
-        }
-        else
-        {
-            HeaderActivity_.intent(this)
-                    .header(header)
-                    .start();
-        }
+        final ContainerOut containerout = (ContainerOut) item;
+
+        ContainerOutActivity_.intent(this)
+                .containerout(containerout)
+                .start();
+
+
     }
 
     /****************************************/
-    // TODO POST listGateIN
+    // TODO POST listGateOUT
     /****************************************/
 
     @Background
     void doList()
     {
         IOException error = null;
-        Header[] result = null;
+        ContainerOut[] result = null;
         try
         {
-            result = api.list_inspection().execute().body();
+            result = api.list_gateout().execute().body();
             if (result == null) error = util.createError();
         }
         catch (UnknownHostException e)
@@ -206,18 +173,18 @@ public class ContainerOutFragment extends Fragment implements RecyclerViewAdapte
     }
 
     @UiThread
-    void afterList(IOException error, Header[] result)
+    void afterList(IOException error, ContainerOut[] result)
     {
         if (error != null)
         {
-            util.error(getContext(), R.string.inspection_list, "ContainerOutF_List", error);
+            util.error(getContext(), R.string.containerout_list, "ContainerOutF_List", error);
         }
         else if (result != null)
         {
             containerOutAdapter.apply(result);
-            InspectionService_.intent(getContext())
-                    .check(new Headers(result))
-                    .start();
+//            InspectionService_.intent(getContext())
+//                    .check(new containerout(result))
+//                    .start();
         }
         containerOutAdapter.setEnabled(true);
         _refresh.setActionView(null);

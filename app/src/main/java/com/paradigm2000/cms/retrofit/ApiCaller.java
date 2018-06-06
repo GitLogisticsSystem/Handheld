@@ -11,6 +11,7 @@ import com.paradigm2000.cms.app.MyPref_;
 import com.paradigm2000.cms.app.PhotoGroup;
 import com.paradigm2000.cms.gson.Booking;
 import com.paradigm2000.cms.gson.Container;
+import com.paradigm2000.cms.gson.ContainerOut;
 import com.paradigm2000.cms.gson.Detail;
 import com.paradigm2000.cms.gson.Enquiry;
 import com.paradigm2000.cms.gson.Header;
@@ -114,6 +115,13 @@ public class ApiCaller
         body.addProperty("usercode", pref.username().get());
         if (DEBUG) Log.i(TAG, "params: " + body);
         return services.list_inspection(body);
+    }
+    public Call<ContainerOut[]> list_gateout()
+    {
+        JsonObject body = new JsonObject();
+        body.addProperty("usercode", pref.username().get());
+        if (DEBUG) Log.i(TAG, "params: " + body);
+        return services.list_gateout(body);
     }
 
     public Call<Container[]> list_container(String input)
@@ -241,6 +249,7 @@ public class ApiCaller
         return services.delHeader(body);
     }
 
+
     public Call<Header> checkContainer(String oper, String cont)
     {
         JsonObject body = new JsonObject();
@@ -276,6 +285,17 @@ public class ApiCaller
         body.addProperty("std", header.std);
         body.addProperty("intrmk", header.remark);
         body.addProperty("rtable", header.rtable);
+        if (DEBUG) Log.i(TAG, "params: " + body);
+        return services.updateHeader(body);
+    }
+    public Call<Boolean> updateContainerOut(ContainerOut containerout)
+    {
+        JsonObject body = new JsonObject();
+        body.addProperty("usercode", pref.username().get());
+        body.addProperty("gat", containerout.ref);
+        body.addProperty("iso", containerout.iso.toUpperCase(Locale.ENGLISH));
+        body.addProperty("cont", containerout.cont);
+        body.addProperty("rtable", containerout.rtable);
         if (DEBUG) Log.i(TAG, "params: " + body);
         return services.updateHeader(body);
     }
@@ -343,6 +363,27 @@ public class ApiCaller
     }
 
     public Call<Boolean> complete_inspect(Header header)
+    {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        builder.addFormDataPart("gat", String.valueOf(header.ref));
+        builder.addFormDataPart("rtable", String.valueOf(header.rtable));
+        if (Common.get().isExternalStorageAvailable())
+        {
+            bindPhotos(header, builder);
+            Detail[] details = header.details;
+            if (details != null && details.length > 0)
+            {
+                for (int i = 0, length = header.details.length; i < length; i += 1)
+                {
+                    Detail detail = details[i];
+                    detail.position = i;
+                    bindPhotos(detail, builder);
+                }
+            }
+        }
+        return services.complete_inspect(builder.build());
+    }
+    public Call<Boolean> complete_containerout(ContainerOut header)
     {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         builder.addFormDataPart("gat", String.valueOf(header.ref));
