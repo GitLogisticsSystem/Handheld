@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.widget.TextView;
@@ -14,14 +13,12 @@ import com.h6ah4i.android.widget.advrecyclerview.decoration.SimpleListDividerDec
 import com.labo.kaji.fragmentanimations.MoveAnimation;
 import com.paradigm2000.cms.event.PhotosCheckEvent;
 import com.paradigm2000.cms.gson.ContainerOut;
-import com.paradigm2000.cms.gson.Header;
-import com.paradigm2000.cms.gson.Headers;
+
 import com.paradigm2000.cms.retrofit.ApiCaller;
 import com.paradigm2000.cms.widget.ContainerOutAdapter;
 import com.paradigm2000.core.Fragment;
 import com.paradigm2000.core.bean.EventBus;
 import com.paradigm2000.core.dialog.Dialog;
-import com.paradigm2000.core.retrofit.InternalServerError;
 import com.paradigm2000.core.retrofit.RetrofitUtil;
 import com.paradigm2000.core.widget.RecyclerViewAdapterBase;
 
@@ -39,6 +36,7 @@ import org.androidannotations.annotations.ViewById;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.Locale;
 
 @EFragment(R.layout.fragment_containerout) @OptionsMenu(R.menu.menu_containerout)
 public class ContainerOutFragment extends Fragment implements RecyclerViewAdapterBase.OnItemClickListener{
@@ -113,6 +111,7 @@ public class ContainerOutFragment extends Fragment implements RecyclerViewAdapte
         super.onDestroy();
         bus.unregister(this);
     }
+
 
     /****************************************/
     // TODO UI events
@@ -190,56 +189,5 @@ public class ContainerOutFragment extends Fragment implements RecyclerViewAdapte
         _refresh.setActionView(null);
     }
 
-    /****************************************/
-    // TODO POST LinkOldSUD
-    /****************************************/
 
-    @Background
-    void doLink(Header header, Dialog dialog)
-    {
-        IOException error = null;
-        Boolean result = null;
-        try
-        {
-            result = api.link(header).execute().body();
-            if (result == null) error = util.createError();
-            else header.prev_suh = 0;
-        }
-        catch (UnknownHostException e)
-        {
-            if (!isDestroyed()) util.noNetwork(getContext());
-        }
-        catch (SocketTimeoutException e)
-        {
-            if (!isDestroyed()) util.timeout(getContext());
-        }
-        catch (IOException e)
-        {
-            error = e;
-        }
-        if (!isDestroyed()) afterLink(error, result, header, dialog);
-    }
-
-    @UiThread
-    void afterLink(IOException error, Boolean result, Header header, Dialog dialog)
-    {
-        if (error != null)
-        {
-            String msg = error.getMessage();
-            if (TextUtils.isEmpty(msg)) msg = error.toString();
-            dialog.changeType(Dialog.ERROR_TYPE).setContent(msg);
-            if (error instanceof InternalServerError) util.report("ContainerOutF_link", error);
-        }
-        else if (result != null)
-        {
-            dialog.dismissWithAnimation();
-            HeaderActivity_.intent(ContainerOutFragment.this)
-                    .header(header)
-                    .start();
-        }
-        else
-        {
-            dialog.dismissWithAnimation();
-        }
-    }
 }

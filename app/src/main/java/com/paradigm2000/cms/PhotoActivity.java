@@ -61,12 +61,13 @@ public class PhotoActivity extends Activity implements PhotoAdapter.AddPhotoList
     EventBus bus;
     @Extra("Photo_header") @InstanceState
     Header header;
-    @Extra("Container_Out")@InstanceState
+    @Extra("Photo_Container_Out")@InstanceState
     ContainerOut containerout;
     @Extra("Photo_detail") @InstanceState
     Detail detail;
     @Extra("Photo_repair") @InstanceState
     Repair repair;
+
     @InstanceState
     Uri lastPhoto;
     @SystemService
@@ -88,6 +89,7 @@ public class PhotoActivity extends Activity implements PhotoAdapter.AddPhotoList
         if (header != null) photoGroup = header;
         if (detail != null) photoGroup = detail;
         else if (repair != null) photoGroup = repair;
+        else if(containerout!=null)photoGroup = containerout;
         setTitle(photoGroup.getTitle());
     }
 

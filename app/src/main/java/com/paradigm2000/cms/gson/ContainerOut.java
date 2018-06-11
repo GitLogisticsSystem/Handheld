@@ -179,6 +179,6 @@ public class ContainerOut implements PhotoGroup
     @Override @SuppressWarnings("ConstantConditions")
     public Folder getFolder(Context context)
     {
-        return Folder.data(context, true).folder(cont).folder("containerout");
+        return Folder.data(context, true).folder(trac).folder("containerout");
     }
 }
