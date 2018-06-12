@@ -52,6 +52,10 @@ repositories {
     - field TPC
     v2.2.14
     - libraries updated
+    ~v2.2.17
+    - filed added in enquiry
+    v2.2.18
+    - add enw menu cotainer out
  */
 
 android {
@@ -63,7 +67,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "v2.2.18 (2018/06/05)"
+        versionName "v2.2.19 (2018/06/12)"
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {

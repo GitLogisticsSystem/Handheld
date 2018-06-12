@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.text.InputFilter;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -33,7 +33,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
-import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
@@ -65,7 +64,7 @@ public class ContainerOutActivity  extends Activity
     @OptionsMenuItem(R.id.refresh)
     MenuItem _refresh;
     @ViewById(R.id.container)
-    EditText _trac;
+    EditText _cont;
 
     @ViewById(R.id.complete)
     Button _complete;
@@ -91,17 +90,21 @@ public class ContainerOutActivity  extends Activity
     {
         super.onCreate(savedInstanceState);
         setDisplayHomeAsUpEnabled(true);
+
+
+
     }
 
 
     @AfterViews
     void afterViews()
     {
-        Common.get().forceUppercase(_trac);
-            _trac.requestFocus();
+        Common.get().forceUppercase(_cont);
+            _cont.requestFocus();
             _complete.setEnabled(true);
 
-        showHeader();
+        //showHeader();
+        _cont.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11),new InputFilter.AllCaps()});
     }
 
     @Override
@@ -161,9 +164,9 @@ public class ContainerOutActivity  extends Activity
     void changeMode()
     {
         setTitle(containerout.cont);
-        //((View) _trac.getParent()).setVisibility( View.GONE);
+        //((View) _cont.getParent()).setVisibility( View.GONE);
 
-        _complete.setText(containerout.isCompleted()? R.string.delete: R.string.complete);
+        //_complete.setText(containerout.isCompleted()? R.string.delete: R.string.complete);
     }
 
     void setViewEditable(EditText view, boolean editable)
@@ -196,22 +199,29 @@ public class ContainerOutActivity  extends Activity
     {
         if (Common.get().isExternalStorageAvailable())
         {
-            Folder folder = containerout.getFolder(this);
-            File[] files = folder.listFiles();
-            if (files == null || files.length == 0)
-            {
-                if (containerout.isCompleted())
-                {
-                    _photos.setVisible(false);
-                }
-                else
-                {
-                    _photos.setVisible(true);
-                    _photos.setIcon(R.drawable.ic_add_a_photo_white_24dp);
-                }
-            }
-            else
-            {
+//            Folder folder = containerout.getFolder(this);
+//            File[] files = folder.listFiles();
+//            if (files == null || files.length == 0)
+//            {
+//                if (containerout.isCompleted())
+//                {
+//                 //   _photos.setVisible(false);
+//                }
+//                else
+//                {
+//                    _photos.setVisible(true);
+//                    _photos.setIcon(R.drawable.ic_add_a_photo_white_24dp);
+//                }
+//            }
+//            else
+//            {
+//                //_photos.setVisible(false);
+//                _photos.setIcon(R.drawable.ic_add_a_photo_light_24dp);
+//            }
+            if(_cont.getText().length()>0){
+                _photos.setVisible(true);
+                _photos.setIcon(R.drawable.ic_add_a_photo_white_24dp);
+            }else{
                 _photos.setVisible(false);
                 _photos.setIcon(R.drawable.ic_add_a_photo_light_24dp);
             }
@@ -227,10 +237,12 @@ public class ContainerOutActivity  extends Activity
     ContainerOut commit()
     {
         ContainerOut edited = containerout.clone();
-        edited.cont = _trac.getText().toString();
-
+        edited.cont = _cont.getText().toString();
+        edited.gat = containerout.ref;
+        Log.i("Apicaller","this : "+edited.cont);
         return edited;
     }
+
 
     int chk_dig2(String cont)
     {
@@ -292,126 +304,90 @@ public class ContainerOutActivity  extends Activity
     void refresh()
     {
         _refresh.setActionView(R.layout.menuitem_loading);
-
-        //_complete.setEnabled(false);
-        _refresh.setActionView(null);
+        _complete.setEnabled(false);
+        doRefresh();
+        //_refresh.setActionView(null);
     }
 
 
-    @FocusChange(R.id.cont)
-    void checkCont(View view, boolean hasFocus)
+    boolean checkCont()
     {
-        if (!hasFocus)
+
+        boolean error = false;
+        String cont = _cont.getText().toString();
+        if (cont.length() != 11)
         {
-            boolean error = false;
-            String cont = _trac.getText().toString();
-            if (cont.length() != 11)
+            Toast.makeText(this, R.string.invalid_cont, Toast.LENGTH_SHORT).show();
+            error = true;
+        }
+        else
+        {
+            int dig = Integer.parseInt(String.valueOf(cont.charAt(10)));
+            int dig2 = chk_dig2(cont);
+            if (dig2 != dig)
             {
-                Toast.makeText(this, R.string.invalid_cont, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.invalid_chk_dig, dig2), Toast.LENGTH_SHORT).show();
                 error = true;
             }
-            else
-            {
-                int dig = Integer.parseInt(String.valueOf(cont.charAt(10)));
-                int dig2 = chk_dig2(cont);
-                if (dig2 != dig)
-                {
-                    Toast.makeText(this, getString(R.string.invalid_chk_dig, dig2), Toast.LENGTH_SHORT).show();
-                    error = true;
-                }
-            }
-            if (error)
-            {
-                vibrator.vibrate(Common.PATTERN, -1);
-                handler.post(new Runnable() { public void run() { _trac.requestFocus(); }});
-            }
-            else
-            {
-
-            }
         }
+        if (error)
+        {
+            vibrator.vibrate(Common.PATTERN, -1);
+            handler.post(new Runnable() { public void run() { _cont.requestFocus(); }});
+            return false;
+        }else{
+            return true;
+        }
+
+
     }
 
 
     @Click(R.id.complete)
     void complete()
     {
-        new Dialog(this, Dialog.PROMPT_TYPE)
-                .setTitle(containerout.cont)
-                .setContentRes(R.string.confirm, getString(containerout.isCompleted()? R.string.delete: R.string.complete).toLowerCase(Locale.ENGLISH))
-                .setConfirm(containerout.isCompleted()? R.string.delete: R.string.complete)
-                .setConfirmListener(new Dialog.OnClickListener()
-                {
-                    @Override
-                    public void onClick(Dialog dialog)
-                    {
-                        dialog.changeType(Dialog.PROGRESS_TYPE)
-                                .setCloseOnClick(false)
-                                .setCancelOnBack(false)
-                                .setContentRes(R.string.LOADING);
-                        doComplete(commit(), dialog);
-                    }
-                })
-                .show();
+        if(checkCont()) {
+            new Dialog(this, Dialog.PROMPT_TYPE)
+                    .setTitle(containerout.trac)
+                    .setContentRes(R.string.confirm, getString(R.string.update).toLowerCase(Locale.ENGLISH))
+                    .setConfirm(R.string.update)
+                    .setConfirmListener(new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(Dialog dialog) {
+                            dialog.changeType(Dialog.PROGRESS_TYPE)
+                                    .setCloseOnClick(false)
+                                    .setCancelOnBack(false)
+                                    .setContentRes(R.string.LOADING);
+                            doComplete(commit(), dialog);
+                        }
+                    })
+                    .show();
+        }
     }
 
 
     /****************************************/
-    // TODO POST uptGatelog
+    // TODO POST getAcc, getMacc, getAllSurveyCharge, getAllSurveySummary
     /****************************************/
 
     @Background
-    void doUpdate(ContainerOut containerout, Dialog dialog)
+    void doRefresh()
     {
-        Boolean result = null;
         IOException error = null;
-        try
-        {
-            result = api.updateContainerOut(containerout).execute().body();
-            if (result == null) error = util.createError();
-        }
-        catch (UnknownHostException e)
-        {
-            if (!isDestroyed()) util.noNetwork(this);
-        }
-        catch (SocketTimeoutException e)
-        {
-            if (!isDestroyed()) util.timeout(this);
-        }
-        catch (IOException e)
-        {
-            error = e;
-        }
-        afterUpdate(error, result, containerout, dialog);
+        //checkCont();
+        afterRefresh(error);
     }
 
     @UiThread
-    void afterUpdate(IOException error, Boolean result, ContainerOut header, Dialog dialog)
+    void afterRefresh(IOException error)
     {
-        if (error != null)
-        {
-            vibrator.vibrate(Common.PATTERN, -1);
-            dialog.changeType(Dialog.ERROR_TYPE).setContent(error.getMessage());
-            if (error instanceof InternalServerError) util.report("Header_update", error);
-        }
-        else if (dialog != null)
-        {
-//                dialog.dismissWithAnimation();
-//                this.containerout = containerout;
-//                showHeader();
-//                DetailActivity_.intent(this)
-//                        .containerout(containerout)
-//                        .start();
-        }
-        else
-        {
-
-            _complete.setEnabled(true);
-        }
+        _refresh.setActionView(null);
+        _complete.setEnabled(true);
     }
 
+
     /****************************************/
-    // TODO POST uploadPhoto.ashx
+    // TODO POST updateContainer and uploadPhoto.ashx
     /****************************************/
 
     @Background
@@ -422,9 +398,19 @@ public class ContainerOutActivity  extends Activity
         try
         {
 
-                result = api.complete_containerout(containerout).execute().body();
-                if (result == null) error = util.createError();
+            result = api.updateContainerOut(edited).execute().body();
+            if (result == null) error = util.createError();
+            if (Common.get().isExternalStorageAvailable())
+            {
+                Folder folder = containerout.getFolder(this);
+                File[] files = folder.listFiles();
+                if(files == null || files.length == 0) {
 
+                }else{
+                    //result = api.complete_containerout(edited).execute().body();
+                    if (result == null) error = util.createError();
+                }
+            }
 
         }
         catch (UnknownHostException e)

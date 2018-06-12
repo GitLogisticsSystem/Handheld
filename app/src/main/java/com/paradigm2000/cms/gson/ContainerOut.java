@@ -35,6 +35,7 @@ public class ContainerOut implements PhotoGroup
     public String stat;
     public String time1;
     public String iso;
+    public int gat;
     public String nwgt;
     public int mgw;
     public String trac;
@@ -67,6 +68,7 @@ public class ContainerOut implements PhotoGroup
     public ContainerOut clone()
     {
         ContainerOut containerout = new ContainerOut();
+        containerout.gat = gat;
         containerout.ref = ref;
         containerout.oper = oper;
         containerout.grade = grade;

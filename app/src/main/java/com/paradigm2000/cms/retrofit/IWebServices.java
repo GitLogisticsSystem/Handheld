@@ -84,7 +84,7 @@ public interface IWebServices
     @POST("androidbc.asmx/uptGatelog")
     Call<Boolean> updateHeader(@Body JsonObject body);
 
-    @POST("androidbc.asmx/uptGatelog")
+    @POST("androidbc.asmx/uptOut")
     Call<Boolean> updateContainerOut(@Body JsonObject body);
 
     @POST("androidbc.asmx/uptCTN")

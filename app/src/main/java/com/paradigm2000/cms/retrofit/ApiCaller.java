@@ -293,11 +293,10 @@ public class ApiCaller
         JsonObject body = new JsonObject();
         body.addProperty("usercode", pref.username().get());
         body.addProperty("gat", containerout.ref);
-        body.addProperty("iso", containerout.iso.toUpperCase(Locale.ENGLISH));
         body.addProperty("cont", containerout.cont);
-        body.addProperty("rtable", containerout.rtable);
+        body.addProperty("rtable", "GAT");
         if (DEBUG) Log.i(TAG, "params: " + body);
-        return services.updateHeader(body);
+        return services.updateContainerOut(body);
     }
 
     public Call<double[]> getCharge(Header header, String cpn, String rp, String s1, String s2, String qty, String loca, String dmcode, String macc, String estm)
@@ -383,18 +382,18 @@ public class ApiCaller
         }
         return services.complete_inspect(builder.build());
     }
-    public Call<Boolean> complete_containerout(ContainerOut header)
+    public Call<Boolean> complete_containerout(ContainerOut containerout)
     {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        builder.addFormDataPart("gat", String.valueOf(header.ref));
-        builder.addFormDataPart("rtable", String.valueOf(header.rtable));
+        builder.addFormDataPart("gat", String.valueOf(containerout.ref));
+        builder.addFormDataPart("rtable", "GAT");
         if (Common.get().isExternalStorageAvailable())
         {
-            bindPhotos(header, builder);
-            Detail[] details = header.details;
+            bindPhotos(containerout, builder);
+            Detail[] details = containerout.details;
             if (details != null && details.length > 0)
             {
-                for (int i = 0, length = header.details.length; i < length; i += 1)
+                for (int i = 0, length = containerout.details.length; i < length; i += 1)
                 {
                     Detail detail = details[i];
                     detail.position = i;
