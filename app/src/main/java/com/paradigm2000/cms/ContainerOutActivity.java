@@ -1,14 +1,17 @@
 package com.paradigm2000.cms;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,9 +68,12 @@ public class ContainerOutActivity  extends Activity
     MenuItem _refresh;
     @ViewById(R.id.container)
     EditText _cont;
-
-    @ViewById(R.id.complete)
-    Button _complete;
+    @ViewById(R.id.upload)
+    Button _upload;
+    @ViewById(R.id.update)
+    Button _update;
+    @ViewById(R.id.changeCont)
+    Button _change;
     @Bean
     ApiCaller api;
     @Bean
@@ -82,29 +88,45 @@ public class ContainerOutActivity  extends Activity
     Vibrator vibrator;
 
     Handler handler = new Handler();
-    SimpleDateFormat formatter = new SimpleDateFormat("MMyyyy", Locale.getDefault());
-    String[] opers = new String[0];
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setDisplayHomeAsUpEnabled(true);
-
-
-
     }
 
 
     @AfterViews
     void afterViews()
     {
+        setTitle(containerout.trac);
         Common.get().forceUppercase(_cont);
-            _cont.requestFocus();
-            _complete.setEnabled(true);
+        _cont.requestFocus();
 
-        //showHeader();
         _cont.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11),new InputFilter.AllCaps()});
+        if(!TextUtils.isEmpty(containerout.cont)) {
+            if (containerout.cont.length() > 0) {
+                //_cont.setInputType(InputType.TYPE_NULL);
+                _cont.setText(containerout.cont);
+                _cont.setEnabled(false);
+                _update.setEnabled(false);
+                _upload.setEnabled(true);
+                _change.setEnabled(true);
+                _change.setVisibility(View.VISIBLE);
+            }else{
+                _update.setEnabled(true);
+                _upload.setEnabled(false);
+                _change.setEnabled(false);
+                _change.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            _update.setEnabled(true);
+            _upload.setEnabled(false);
+            _change.setEnabled(false);
+            _change.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -146,8 +168,8 @@ public class ContainerOutActivity  extends Activity
         else
         {
             new Dialog(this, Dialog.PROMPT_TYPE)
-                    .setTitle(containerout.cont)
-                    .setContentRes(R.string.confirm, getString(R.string.leave2))
+                    .setTitle(containerout.trac)
+                    .setContentRes(R.string.confirm, getString(R.string.leave3))
                     .setConfirm(R.string.leave)
                     .setConfirmListener(new Dialog.OnClickListener()
                     {
@@ -163,10 +185,29 @@ public class ContainerOutActivity  extends Activity
 
     void changeMode()
     {
-        setTitle(containerout.cont);
+        setTitle(containerout.trac);
         //((View) _cont.getParent()).setVisibility( View.GONE);
-
-        //_complete.setText(containerout.isCompleted()? R.string.delete: R.string.complete);
+        if(!TextUtils.isEmpty(containerout.cont)) {
+            if (containerout.cont.length() > 0) {
+                //_cont.setInputType(InputType.TYPE_NULL);
+                _cont.setEnabled(false);
+                _update.setEnabled(false);
+                _upload.setEnabled(true);
+                _change.setEnabled(true);
+                _change.setVisibility(View.VISIBLE);
+            }else{
+                _update.setEnabled(true);
+                _upload.setEnabled(false);
+                _change.setEnabled(false);
+                _change.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            setViewEditable(_cont,true);
+            _update.setEnabled(true);
+            _upload.setEnabled(false);
+            _change.setEnabled(false);
+            _change.setVisibility(View.INVISIBLE);
+        }
     }
 
     void setViewEditable(EditText view, boolean editable)
@@ -177,47 +218,12 @@ public class ContainerOutActivity  extends Activity
         view.setGravity(editable? Gravity.NO_GRAVITY: Gravity.CENTER_HORIZONTAL);
     }
 
-    void showHeader()
-    {
-//            _oper.setText(containerout.oper);
-//            _grade.setText(containerout.grade);
-//            _size.setText(containerout.size);
-//            _type.setText(containerout.type);
-//            _iso.setText(containerout.iso);
-//            _mdte.setText(containerout.mdte);
-//            _mgw.setText(containerout.mgw == 0? null: String.valueOf(containerout.mgw));
-//
-//            _nwgt.setText(containerout.nwgt);
-//
-//            _tare.setText(containerout.tare == 0? null: String.valueOf(containerout.tare));
-//            _status.setText(containerout.stat);
-//            _std.setText(containerout.std);
-//            _remark.setText(containerout.remark);
-    }
+
 
     void updateImageMenuItem()
     {
         if (Common.get().isExternalStorageAvailable())
         {
-//            Folder folder = containerout.getFolder(this);
-//            File[] files = folder.listFiles();
-//            if (files == null || files.length == 0)
-//            {
-//                if (containerout.isCompleted())
-//                {
-//                 //   _photos.setVisible(false);
-//                }
-//                else
-//                {
-//                    _photos.setVisible(true);
-//                    _photos.setIcon(R.drawable.ic_add_a_photo_white_24dp);
-//                }
-//            }
-//            else
-//            {
-//                //_photos.setVisible(false);
-//                _photos.setIcon(R.drawable.ic_add_a_photo_light_24dp);
-//            }
             if(_cont.getText().length()>0){
                 _photos.setVisible(true);
                 _photos.setIcon(R.drawable.ic_add_a_photo_white_24dp);
@@ -239,7 +245,7 @@ public class ContainerOutActivity  extends Activity
         ContainerOut edited = containerout.clone();
         edited.cont = _cont.getText().toString();
         edited.gat = containerout.ref;
-        Log.i("Apicaller","this : "+edited.cont);
+        //Log.i("Apicaller","this : "+edited.cont);
         return edited;
     }
 
@@ -304,9 +310,9 @@ public class ContainerOutActivity  extends Activity
     void refresh()
     {
         _refresh.setActionView(R.layout.menuitem_loading);
-        _complete.setEnabled(false);
+        _update.setEnabled(false);
+        _upload.setEnabled(false);
         doRefresh();
-        //_refresh.setActionView(null);
     }
 
 
@@ -322,13 +328,20 @@ public class ContainerOutActivity  extends Activity
         }
         else
         {
-            int dig = Integer.parseInt(String.valueOf(cont.charAt(10)));
-            int dig2 = chk_dig2(cont);
-            if (dig2 != dig)
-            {
-                Toast.makeText(this, getString(R.string.invalid_chk_dig, dig2), Toast.LENGTH_SHORT).show();
+            try{
+                int dig = Integer.parseInt(String.valueOf(cont.charAt(10)));
+                int dig2 = chk_dig2(cont);
+                if (dig2 != dig)
+                {
+                    Toast.makeText(this, getString(R.string.invalid_chk_dig, dig2), Toast.LENGTH_SHORT).show();
+                    error = true;
+                }
+            }catch (NumberFormatException e){
+                Toast.makeText(this, R.string.invalid_cont, Toast.LENGTH_SHORT).show();
                 error = true;
             }
+
+
         }
         if (error)
         {
@@ -342,10 +355,11 @@ public class ContainerOutActivity  extends Activity
 
     }
 
-
-    @Click(R.id.complete)
-    void complete()
+    @Click(R.id.update)
+    void update()
     {
+        //Log.d(TAG, "update: we are in");
+        //_update.setEnabled(false);
         if(checkCont()) {
             new Dialog(this, Dialog.PROMPT_TYPE)
                     .setTitle(containerout.trac)
@@ -358,14 +372,50 @@ public class ContainerOutActivity  extends Activity
                                     .setCloseOnClick(false)
                                     .setCancelOnBack(false)
                                     .setContentRes(R.string.LOADING);
-                            doComplete(commit(), dialog);
+                            doUpdate(commit(), dialog);
                         }
                     })
                     .show();
         }
     }
 
+    @Click(R.id.upload)
+    void upload()
+    {
+        if(checkCont()) {
+            new Dialog(this, Dialog.PROMPT_TYPE)
+                    .setTitle(containerout.trac)
+                    .setContentRes(R.string.confirm, getString(R.string.upload).toLowerCase(Locale.ENGLISH))
+                    .setConfirm(R.string.upload)
+                    .setConfirmListener(new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(Dialog dialog) {
+                            dialog.changeType(Dialog.PROGRESS_TYPE)
+                                    .setCloseOnClick(false)
+                                    .setCancelOnBack(false)
+                                    .setContentRes(R.string.LOADING);
+                            doUpload(commit(), dialog);
+                        }
+                    })
+                    .show();
+        }
+    }
 
+    @Click(R.id.changeCont)
+    void change()
+    {
+        //Log.d(TAG, "update: we are in");
+        //_update.setEnabled(false);
+        _cont.setEnabled(true);
+        _update.setEnabled(true);
+        _upload.setEnabled(false);
+        _change.setEnabled(false);
+        _change.setVisibility(View.INVISIBLE);
+        Folder folder = containerout.getFolder(this);
+        if (!folder.delete() && DEBUG) Log.w(TAG, "Fail to delete @" + folder);
+        //Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
+        //finish();
+    }
     /****************************************/
     // TODO POST getAcc, getMacc, getAllSurveyCharge, getAllSurveySummary
     /****************************************/
@@ -382,24 +432,21 @@ public class ContainerOutActivity  extends Activity
     void afterRefresh(IOException error)
     {
         _refresh.setActionView(null);
-        _complete.setEnabled(true);
+        //onRefresh();
+        updateImageMenuItem();
+        changeMode();
     }
-
-
     /****************************************/
-    // TODO POST updateContainer and uploadPhoto.ashx
+    // TODO POST uploadPhoto.ashx
     /****************************************/
 
     @Background
-    void doComplete(ContainerOut edited, Dialog dialog)
+    void doUpload(ContainerOut edited, Dialog dialog)
     {
         Boolean result = null;
         IOException error = null;
         try
         {
-
-            result = api.updateContainerOut(edited).execute().body();
-            if (result == null) error = util.createError();
             if (Common.get().isExternalStorageAvailable())
             {
                 Folder folder = containerout.getFolder(this);
@@ -407,11 +454,10 @@ public class ContainerOutActivity  extends Activity
                 if(files == null || files.length == 0) {
 
                 }else{
-                    //result = api.complete_containerout(edited).execute().body();
+                    result = api.upload_containerout(edited).execute().body();
                     if (result == null) error = util.createError();
                 }
             }
-
         }
         catch (UnknownHostException e)
         {
@@ -425,17 +471,69 @@ public class ContainerOutActivity  extends Activity
         {
             error = e;
         }
-        afterComplete(error, result, dialog);
+        afterUpload(error, result, dialog);
     }
 
     @UiThread
-    void afterComplete(IOException error, Boolean result, Dialog dialog)
+    void afterUpload(IOException error, Boolean result, Dialog dialog)
     {
         if (error != null)
         {
             vibrator.vibrate(Common.PATTERN, -1);
             dialog.changeType(Dialog.ERROR_TYPE).setContent(error.getMessage());
-            if (error instanceof InternalServerError) util.report("ContainerOut_complete", error);
+            if (error instanceof InternalServerError) util.report("ContainerOut_upload", error);
+        }
+        else if (result != null && result)
+        {
+            dialog.dismissWithAnimation();
+            Folder folder = containerout.getFolder(this);
+            if (!folder.delete() && DEBUG) Log.w(TAG, "Fail to delete @" + folder);
+            Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else
+        {
+            dialog.dismissWithAnimation();
+        }
+    }
+
+    /****************************************/
+    // TODO POST updateContainer
+    /****************************************/
+
+    @Background
+    void doUpdate(ContainerOut edited, Dialog dialog)
+    {
+        Boolean result = null;
+        IOException error = null;
+        try
+        {
+            result = api.updateContainerOut(edited).execute().body();
+            if (result == null) error = util.createError();
+        }
+        catch (UnknownHostException e)
+        {
+            if (!isDestroyed()) util.noNetwork(this);
+        }
+        catch (SocketTimeoutException e)
+        {
+            if (!isDestroyed()) util.timeout(this);
+        }
+        catch (IOException e)
+        {
+            error = e;
+        }
+        afterUpdate(error, result, dialog);
+    }
+
+    @UiThread
+    void afterUpdate(IOException error, Boolean result, Dialog dialog)
+    {
+        if (error != null)
+        {
+            vibrator.vibrate(Common.PATTERN, -1);
+            dialog.changeType(Dialog.ERROR_TYPE).setContent(error.getMessage());
+            if (error instanceof InternalServerError) util.report("ContainerOut_update", error);
         }
         else if (result != null && result)
         {

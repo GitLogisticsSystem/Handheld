@@ -104,5 +104,7 @@
     <string name="conatiner_out" translatable="false">Container Out</string>
     <string name="trackerNo" translatable="false">Tracker No.</string>
     <string name="update" translatable="false">Update</string>
-    <string name="containerout_list">Container Out List</string>
+    <string name="containerout_list" translatable="false">Container Out List</string>
+    <string name="change_cont" translatable="false">Change Container</string>
+    <string name="leave3">leave without save changes</string>
 </resources>

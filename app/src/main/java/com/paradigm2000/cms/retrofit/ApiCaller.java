@@ -382,7 +382,7 @@ public class ApiCaller
         }
         return services.complete_inspect(builder.build());
     }
-    public Call<Boolean> complete_containerout(ContainerOut containerout)
+    public Call<Boolean> upload_containerout(ContainerOut containerout)
     {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         builder.addFormDataPart("gat", String.valueOf(containerout.ref));
