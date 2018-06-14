@@ -91,8 +91,7 @@ public class Parser
         throw new APIException(message);
     }
 
-    public static Booking queryBooking(Context context, Gson gson, String response) throws Exception
-    {
+    public static Booking queryBooking(Context context, Gson gson, String response) {
         Booking[] result = gson.fromJson(response, Booking[].class);
         if (result.length == 0) return null;
         Booking booking = result[0];

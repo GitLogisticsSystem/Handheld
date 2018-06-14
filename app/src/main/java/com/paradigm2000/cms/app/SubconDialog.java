@@ -30,7 +30,7 @@ public class SubconDialog extends Dialog2 {
 
             @Override
             public void onLayout(Dialog2 dialog, FrameLayout parent) {
-                _textview = (AutoCompleteView) parent.findViewById(R.id.textview);
+                _textview = parent.findViewById(R.id.textview);
                 _textview.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
                 _textview.setItems(mSubcons);
             }

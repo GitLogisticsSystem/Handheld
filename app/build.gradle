@@ -60,6 +60,8 @@ repositories {
     - container out debug in progress
     v3.0.0
     -containerout debug complete
+    v3.0.1
+    -container out list minor adjust
  */
 
 android {
@@ -71,7 +73,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "v3.0.0 (2018/06/14)"
+        versionName "v3.0.1 (2018/06/14)"
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {

@@ -75,14 +75,14 @@ public class MainActivity extends Activity implements NavigationView.OnNavigatio
         setDisplayHomeAsUpEnabled(true);
         toggle.syncState();
         _drawer.setNavigationItemSelectedListener(this);
-        SimpleDraweeView view = (SimpleDraweeView) _drawer.getHeaderView(0).findViewById(R.id.header);
+        SimpleDraweeView view = _drawer.getHeaderView(0).findViewById(R.id.header);
         // TODO retrieve from preference
         int resId = /* pref.ServerURL().exists()? R.drawable.engkong: */ R.drawable.header;
         Uri uri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId)).build();
         view.setImageURI(uri);
         if (!pref.surveyer().get()) _drawer.getMenu().removeItem(R.id.inspection);
         onNavigationItemSelected(_drawer.getMenu().getItem(0));
-        TextView _welcome = (TextView) _drawer.getHeaderView(0).findViewById(R.id.welcome);
+        TextView _welcome = _drawer.getHeaderView(0).findViewById(R.id.welcome);
         String username = pref.username().get();
         username = Character.toUpperCase(username.charAt(0)) + username.substring(1);
         _welcome.setText(getString(R.string.welcome, username));

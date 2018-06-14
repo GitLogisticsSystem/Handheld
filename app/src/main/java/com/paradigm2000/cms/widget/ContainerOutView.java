@@ -42,30 +42,28 @@ public class ContainerOutView extends FrameLayout
         setBackgroundColor(Color.WHITE);
     }
 
-    public void bind(ContainerOut containerout)
-    {
+    public void bind(ContainerOut containerout) {
         Date date = null;
-        try
-        {
+        try {
             date = parser.parse(containerout.time1);
-        }
-        catch (ParseException e)
-        {
+        } catch (ParseException e) {
             if (DEBUG) Log.w(TAG, "Fail to parse date @" + containerout.mdte, e);
         }
         String value1 = null;
-        if (!TextUtils.isEmpty(containerout.cont))value1 = containerout.cont;
+        if (!TextUtils.isEmpty(containerout.cont)){
+            value1 = containerout.cont;
+        }else{
+            value1 = String.valueOf(containerout.seq);
+        }
         if (!TextUtils.isEmpty(containerout.oper))value1 += " (" + containerout.oper + ")";
         if (!TextUtils.isEmpty(containerout.size)) value1 += " " + containerout.size;
         if (!TextUtils.isEmpty(containerout.type)) value1 += " / " + containerout.type;
         text1.setText(value1);
         String value2 = "@ " + (date == null? "dd/MM - kk:mm": formatter.format(date));
         if (!TextUtils.isEmpty(containerout.stat)) value2 = containerout.stat + " " + value2;
-        if (!TextUtils.isEmpty(containerout.trac)) value2 +=  value2+" ("+ containerout.trac+") ";
+        if (!TextUtils.isEmpty(containerout.trac)) value2 =  value2+" ("+ containerout.trac+") ";
         text2.setText(value2);
-        new_add.setBackgroundResource(containerout.isSUH()? R.drawable.button_red: R.drawable.button_green);
-        new_add.setText(containerout.isSUH()? R.string.new_add: R.string.gatelog);
-        new_add.setAlpha(containerout.isCompleted()? .1f: 1);
+
     }
 
     @Override

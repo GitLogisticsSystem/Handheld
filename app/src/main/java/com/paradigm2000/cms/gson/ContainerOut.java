@@ -35,6 +35,7 @@ public class ContainerOut implements PhotoGroup
     public String stat;
     public String time1;
     public String iso;
+    public int seq;
     public int gat;
     public String nwgt;
     public int mgw;
@@ -84,6 +85,7 @@ public class ContainerOut implements PhotoGroup
         containerout.details = details;
         containerout.rtable = rtable;
         containerout.trac = trac;
+        containerout.seq = seq;
         return containerout;
     }
 
@@ -97,7 +99,7 @@ public class ContainerOut implements PhotoGroup
                     compare(mgw, containerout.mgw) && compare(tare, containerout.tare) &&
                     compare(stat, containerout.stat) && compare(std, containerout.std) &&
                     compare(remark, containerout.remark) && compare(ref, containerout.ref) &&
-                    compare(nwgt,containerout.nwgt)&&
+                    compare(nwgt,containerout.nwgt)&& compare(seq,containerout.seq)&&
                     compare(oper, containerout.oper) && compare(cont, containerout.cont) &&
                     compare(size, containerout.size) && compare(type, containerout.type) &&
                     compare(time1, containerout.time1) && compare(grade, containerout.grade);
@@ -105,46 +107,7 @@ public class ContainerOut implements PhotoGroup
         return false;
     }
 
-    public String[] stat_list()
-    {
-        return TextUtils.isEmpty(stat_list)? def_stat_list: stat_list.split("\\|");
-    }
 
-    public String[] std_list()
-    {
-        return TextUtils.isEmpty(std_list)? def_std_list: std_list.split("\\|");
-    }
-
-    public boolean isSUH()
-    {
-        return "SUH".equals(rtable);
-    }
-
-    public boolean isCompleted()
-    {
-        return isSUH() && "C".equals(status);
-    }
-
-    public Calendar getCalendar(String input)
-    {
-        Date date = new Date();
-        input = TextUtils.isEmpty(input)? mdte: input;
-        if (input != null && (input.length() != 4 || input.length() != 6))
-        {
-            try
-            {
-                formatter.applyPattern("MMyy" + (input.length() == 6? "yy": ""));
-                if (!TextUtils.isEmpty(input)) date = formatter.parse(input);
-            }
-            catch (Exception e)
-            {
-                if (DEBUG) Log.w(TAG, "Fail to parse @" + input, e);
-            }
-        }
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
-    }
 
     /****************************************/
     // TODO Compare

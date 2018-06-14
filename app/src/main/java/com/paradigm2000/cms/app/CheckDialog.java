@@ -73,9 +73,9 @@ public class CheckDialog extends Dialog2
             @Override
             public void onLayout(final Dialog2 dialog, FrameLayout parent)
             {
-                error = (TextView) parent.findViewById(R.id.error);
+                error = parent.findViewById(R.id.error);
                 error.setVisibility(mError? View.VISIBLE: View.GONE);
-                baseurl = (EditText) parent.findViewById(R.id.baseurl);
+                baseurl = parent.findViewById(R.id.baseurl);
                 baseurl.setOnEditorActionListener(new TextView.OnEditorActionListener()
                 {
                     @Override
@@ -84,7 +84,7 @@ public class CheckDialog extends Dialog2
                         return doCheck(dialog);
                     }
                 });
-                app = (EditText) parent.findViewById(R.id.app);
+                app = parent.findViewById(R.id.app);
                 app.setOnEditorActionListener(new TextView.OnEditorActionListener()
                 {
                     @Override
