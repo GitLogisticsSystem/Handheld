@@ -58,6 +58,8 @@ repositories {
     - add enw menu cotainer out
     v2.2.20
     - container out debug in progress
+    v3.0.0
+    -containerout debug complete
  */
 
 android {
@@ -69,7 +71,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "v2.2.20 (2018/06/13)"
+        versionName "v3.0.0 (2018/06/14)"
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {

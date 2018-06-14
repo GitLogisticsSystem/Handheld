@@ -141,7 +141,7 @@ public class ContainerOutActivity  extends Activity
     {
         updateImageMenuItem();
         refresh();
-        changeMode();
+
     }
 
     @OnActivityResult(REQUEST)
@@ -194,16 +194,19 @@ public class ContainerOutActivity  extends Activity
                 _update.setEnabled(false);
                 _upload.setEnabled(true);
                 _change.setEnabled(true);
+                _photos.setVisible(true);
                 _change.setVisibility(View.VISIBLE);
             }else{
                 _update.setEnabled(true);
                 _upload.setEnabled(false);
                 _change.setEnabled(false);
+                _photos.setVisible(false);
                 _change.setVisibility(View.INVISIBLE);
             }
         }else{
             setViewEditable(_cont,true);
             _update.setEnabled(true);
+            _photos.setVisible(false);
             _upload.setEnabled(false);
             _change.setEnabled(false);
             _change.setVisibility(View.INVISIBLE);
@@ -404,17 +407,47 @@ public class ContainerOutActivity  extends Activity
     @Click(R.id.changeCont)
     void change()
     {
-        //Log.d(TAG, "update: we are in");
-        //_update.setEnabled(false);
+        new Dialog(this, Dialog.PROMPT_TYPE)
+                .setTitle(containerout.trac)
+                .setContentRes(R.string.confirm, getString(R.string.change_contphoto).toLowerCase(Locale.ENGLISH))
+                .setConfirm(R.string.yes)
+                .setConfirmListener(new Dialog.OnClickListener() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                        dialog.changeType(Dialog.PROGRESS_TYPE)
+                                .setCloseOnClick(false)
+                                .setCancelOnBack(false)
+                                .setContentRes(R.string.LOADING);
+                        doChange(dialog);
+                    }
+                })
+                .show();
+
+
+    }
+    /****************************************/
+    // TODO Change container and clean photo
+    /****************************************/
+    @Background
+    void doChange( Dialog dialog){
+        IOException error = null;
+
+        afterChange(error,dialog);
+
+    }
+
+    @UiThread
+    void afterChange(IOException error, Dialog dialog)
+    {
         _cont.setEnabled(true);
         _update.setEnabled(true);
         _upload.setEnabled(false);
         _change.setEnabled(false);
         _change.setVisibility(View.INVISIBLE);
+        _photos.setVisible(false);
         Folder folder = containerout.getFolder(this);
         if (!folder.delete() && DEBUG) Log.w(TAG, "Fail to delete @" + folder);
-        //Toast.makeText(this, R.string.success, Toast.LENGTH_SHORT).show();
-        //finish();
+        dialog.dismissWithAnimation();
     }
     /****************************************/
     // TODO POST getAcc, getMacc, getAllSurveyCharge, getAllSurveySummary

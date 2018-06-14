@@ -49,4 +49,6 @@
         <item>低 (~50kb)</item>
     </string-array>
     <string name="leave3">放棄修改</string>
+    <string name="change">修改</string>
+    <string name="change_contphoto">修改櫃號並刪除未儲存圖片</string>
 </resources>
